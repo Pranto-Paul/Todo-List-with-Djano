@@ -19,7 +19,7 @@ This is a simple Todo-List web application built using Django, allowing users to
 ## Setup Instructions
 
 1. Clone the repository to your local machine.
-2. Install the required dependencies using `pip install -r requirements.txt`.
+2. Install the required dependencies using `pip install django`.
 3. Run the Django development server using `python manage.py runserver`.
 4. Visit http://localhost:8000/ in your web browser to access the Todo-List.
 
@@ -30,9 +30,6 @@ This is a simple Todo-List web application built using Django, allowing users to
 - Click the "Update" button to edit the details of a task.
 - Click the "Delete" button to remove a task from the list.
 
-## Contributing
-
-Contributions are welcome! Please feel free to fork this repository and submit pull requests to suggest improvements or add new features.
 
 ## License
 
