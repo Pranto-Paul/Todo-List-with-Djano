@@ -14,7 +14,7 @@ This is a simple Todo-List web application built using Django, allowing users to
 
 ## Screenshots
 
-![Todo-List Screenshot](Screenshot (1).png)
+![Todo-List Screenshot](https://github.com/Pranto-Paul/Todo-List-with-Djano/blob/main/Screenshot%20(1).png?raw=true)
 
 ## Setup Instructions
 
