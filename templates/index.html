@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .todo-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .todo-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-right: 10px;
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+        }
+
+        .todo-btn {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .todo-list {
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        .todo-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .todo-item:hover {
+            background-color: #eaeaea;
+        }
+
+        .todo-item-check {
+            margin-bottom: 10px;
+        }
+
+        .todo-item-text {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .todo-item-update {
+            color: blueviolet;
+            font-style: italic;
+            margin-bottom: 5px;
+            text-align: right;
+        }
+
+        .todo-item-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .todo-item-buttons button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .todo-item-buttons button:hover {
+            background-color: #45a049;
+        }
+
+        .todo-item-buttons a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .todo-item-buttons button:nth-child(1) {
+            background-color: #4caf50;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .todo-item-buttons button:nth-child(2) {
+            background-color: #f44336;
+            color: #fff;
+            margin-right: 10px;
+        }
+
+        .todo-item-buttons button:nth-child(3) {
+            background-color: #2196f3;
+            color: #fff;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        
+        <form class="todo-form" id="todoForm" method="post">
+            {% csrf_token %}
+            <input type="text" name="title" class="todo-input" id="todoInput" placeholder="Add new task..." required>
+            <button type="submit" class="todo-btn">Add</button>
+        </form>
+        {% for todo in todos reversed %}
+        <ul class="todo-list" id="todoList">
+            <li class="todo-item">
+                <div>
+                    <input type="checkbox" class="todo-item-check" {% if todo.is_done %}checked{% endif %} disabled>
+                    <span class="todo-item-text">{{ todo }}</span>
+                    <br>
+                    <span></span>
+                    <p class="todo-item-update">{{ todo.updated }}</p>
+                </div>
+                <br>
+                <div class="todo-item-buttons">
+                    <a href="{% url 'update' todo.id %}">
+                        <button>Update</button>
+                    </a>
+                    <a href="{% url 'delete' todo.id %}">
+                        <button style="background-color: #f44336;">Delete</button>
+                    </a>
+                    {% if todo.is_done %}
+                    <a href="{% url 'done' todo.id %}">
+                        <button style="background-color: #2196f3;">Undone</button>
+                    </a>
+                    {% else %}
+                    <a href="{% url 'done' todo.id %}">
+                        <button style="background-color: #2196f3;">Done</button>
+                    </a>
+                    {% endif %}
+                </div>
+            </li>
+        </ul>
+        {% endfor %}
+    </div>
+
+    <!-- <script>
+        document.getElementById("todoForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            addTodo();
+        });
+
+        function addTodo() {
+            var todoInput = document.getElementById("todoInput");
+            var todoList = document.getElementById("todoList");
+
+            if (todoInput.value !== "") {
+                var todoItem = document.createElement("li");
+                todoItem.className = "todo-item";
+                todoItem.innerHTML = `
+                    <input type="checkbox" class="todo-item-check">
+                    <span class="todo-item-text">${todoInput.value}</span>
+                    <button class="todo-item-delete">Delete</button>
+                `;
+                todoList.appendChild(todoItem);
+                todoInput.value = "";
+
+                // Add event listener for delete button
+                todoItem.querySelector(".todo-item-delete").addEventListener("click", function() {
+                    todoItem.remove();
+                });
+            }
+        }
+    </script> -->
+</body>
+</html>
