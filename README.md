@@ -2,6 +2,7 @@
 
 
 # Django Todo-List
+##Author-Pranto Paul
 
 This is a simple Todo-List web application built using Django, allowing users to manage their tasks efficiently.
 
